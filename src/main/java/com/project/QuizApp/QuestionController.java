@@ -14,7 +14,7 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @RequestMapping("allQuestions")
+    @GetMapping("allQuestions")
     public List<Question> getAllQuestions() {
         return questionService.getAllQuestions();
     }
