@@ -16,13 +16,11 @@ public class QuestionController {
 
     @GetMapping("allQuestions")
     public List<Question> getAllQuestions() {
-        System.out.println("test");
         return questionService.getAllQuestions();
     }
 
     @GetMapping("/{id}")
     public Question getQuestionById(@PathVariable int id) {
-        System.out.println("test");
         return questionService.getQuestionById(id);
     }
 
