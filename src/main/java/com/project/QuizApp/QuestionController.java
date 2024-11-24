@@ -36,6 +36,11 @@ public class QuestionController {
         return questionService.deleteQuestion(id);
     }
 
+    @PostMapping("/update/{id}")
+    public String saveQuestion(@PathVariable int id, @RequestBody Question updatedQuestion) {
+        return questionService.saveQuestion(id,updatedQuestion);
+    }
+
 
 
 }
