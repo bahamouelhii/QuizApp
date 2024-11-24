@@ -29,11 +29,12 @@ public class QuestionService {
 
     public String saveQuestion(Question question) {
          questionRepository.save(question);
-         return ("Success");
+         return ("Question added !");
     }
 
-    public void deleteQuestion(int id) {
+    public String deleteQuestion(int id) {
         questionRepository.deleteById(id);
+        return ("Question deleted");
     }
 }
 

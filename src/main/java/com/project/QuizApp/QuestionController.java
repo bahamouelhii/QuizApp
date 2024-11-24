@@ -29,7 +29,11 @@ public class QuestionController {
     @PostMapping("/new")
     public String addQuestions(@RequestBody Question question) {
          return questionService.saveQuestion(question);
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public String deleteQuestion(@PathVariable int id) {
+        return questionService.deleteQuestion(id);
     }
 
 
