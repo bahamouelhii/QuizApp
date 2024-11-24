@@ -27,8 +27,9 @@ public class QuestionService {
         return questionRepository.findByDifficulty(difficulty);
     }
 
-    public Question saveQuestion(Question question) {
-        return questionRepository.save(question);
+    public String saveQuestion(Question question) {
+         questionRepository.save(question);
+         return ("Success");
     }
 
     public void deleteQuestion(int id) {
