@@ -2,9 +2,12 @@ package com.project.QuizApp;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class QuestionService {
@@ -16,12 +19,18 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public Question getQuestionById(int id) {
-        return questionRepository.findById(id).orElse(null);
+    public ResponseEntity<Question> getQuestionsById(int id) {
+            try {
+                return new ResponseEntity<>(Objects.requireNonNull(questionRepository.findById(id).orElse(null)), HttpStatus.OK);
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+            return new ResponseEntity<>(new Question(), HttpStatus.NOT_FOUND);
     }
 
-    public List<Question> getQuestionsByCategory(String category) {
-        return questionRepository.findByCategory(category);
+
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        return new ResponseEntity<>(questionRepository.findByCategory(category),HttpStatus.OK);
     }
 
     public List<Question> getQuestionsByDifficulty(String difficulty) {

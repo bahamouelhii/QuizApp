@@ -2,6 +2,8 @@ package com.project.QuizApp;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +18,14 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
 
-    @GetMapping("id/{id}")
-    public Question getQuestionById(@PathVariable int id) {
-        return questionService.getQuestionById(id);
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Question> getQuestionsById(@PathVariable int id) {
+        return questionService.getQuestionsById(id);
     }
 
+
     @GetMapping("/category/{category}")
-    public List<Question> getQuestionsByCategory(@PathVariable String category) {
+    public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable String category) {
         return questionService.getQuestionsByCategory(category);
     }
 
