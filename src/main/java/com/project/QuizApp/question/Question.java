@@ -1,4 +1,4 @@
-package com.project.QuizApp;
+package com.project.QuizApp.question;
 
 import jakarta.persistence.*;
 
