@@ -19,11 +19,7 @@ public class QuizService {
     private QuestionRepository questionRepository;
 
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
-
-
-
         List<Question> questions = questionRepository.findRandomQuestionByCategory(category,numQ);
-
         Quiz quiz;
         quiz = new Quiz();
         quiz.setTitle(title);
@@ -46,6 +42,25 @@ public class QuizService {
             questionForUser.add(qw);
         }
         return new ResponseEntity<>(questionForUser, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> getScore(int id, List<Response> responses) {
+        Quiz quiz = quizRepository.findById(id).get();
+        List<Question> questions = quiz.getQuestions();
+        int i = 0 ;
+        int score = 0 ;
+        for (Response r : responses){
+            Question correspondingQuestion = questions.stream().filter(q -> q.getId() == r.getId()).findFirst().orElse(null);
+
+            assert correspondingQuestion != null;
+
+            if (r.getAnswer().equals(correspondingQuestion.getRightAnswer())){
+                score ++;
+            }
+            i++;
+        }
+
+        return new ResponseEntity<>(score,HttpStatus.OK);
     }
 }
 

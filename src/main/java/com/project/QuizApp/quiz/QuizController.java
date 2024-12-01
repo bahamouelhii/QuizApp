@@ -29,4 +29,11 @@ public class QuizController {
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable int id) {
         return quizService.getQuizQuestions(id);
     }
+
+    @PostMapping("score/{id}")
+    public ResponseEntity<Integer> scoreQuiz(@PathVariable int id, @RequestBody List<Response> responses) {
+        return quizService.getScore(id,responses);
+    }
+
+
 }
