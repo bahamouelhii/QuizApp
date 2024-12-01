@@ -1,6 +1,5 @@
 package com.project.QuizApp.question;
 
-import com.project.QuizApp.quiz.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,5 +19,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     @Query(value = "SELECT * FROM questions WHERE category = :category ORDER BY RAND() LIMIT :numQ", nativeQuery = true)
     List<Question> findRandomQuestionByCategory(String category, int numQ);
+
+    @Query(value = "SELECT A.* FROM questions A, quiz_questions B  WHERE B.quiz_id = :id and A.id = B.questions_id ORDER BY A.id", nativeQuery = true)
+    List<Question> findQuestionByQuiz(int id);
 }
 

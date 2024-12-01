@@ -29,5 +29,10 @@ public class QuizService {
         quizRepository.save(quiz);
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }
+
+    public ResponseEntity<List<Question>> listQuiz(int id) {
+        List<Question> questions = questionRepository.findQuestionByQuiz(id);
+        return new ResponseEntity<>(questions, HttpStatus.OK);
+    }
 }
 
